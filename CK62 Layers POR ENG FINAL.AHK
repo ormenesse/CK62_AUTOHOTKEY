@@ -1,5 +1,5 @@
-;#NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
-; #Warn  ; Enable warnings to assist with detecting common errors.
+#NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
+#Warn  ; Enable warnings to assist with detecting common errors.
 SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
@@ -7,12 +7,20 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
 SetCapsLockState, AlwaysOff
 
+; Current_Keyboard := DllCall("GetKeyboardLayout", "UInt", 0)
+; esse aqui funciona melhor
+getactiveKL() {
+    active_hwnd := WinExist("A")
+    threadID := dllCall("GetWindowThreadProcessId", "uint", active_hwnd, "uint", 0)
+    code := dllCall("GetKeyboardLayout", "uint", threadID, "uint") 
+    return code
+}
 
 ; Arrows
 
 ; Arrow Up
 Capslock & `;::
-If (A_Language = "0416")
+If (getactiveKL() = 68551702)
 {
 	If GetKeyState("Shift")
 	{
@@ -23,7 +31,7 @@ If (A_Language = "0416")
 		Send {up}
 	}
 }
-Else If (A_Language = "0409") 
+Else If (getactiveKL() = 67699721)
 {
 	Send {PgUp}
 }
@@ -31,7 +39,7 @@ Return
 
 ; Arrow Up
 Capslock & /::
-If (A_Language = "0409")
+If (getactiveKL() = 67699721)
 {
 	If GetKeyState("Shift")
 	{
@@ -101,39 +109,39 @@ CapsLock & k:: Send {Ins}
 CapsLock & l:: Send {Home}
 
 CapsLock & ]::
-If (A_Language = "0409") 
+If (getactiveKL() = 67699721) 
 {
 	Send {Pause}
 }
 Return
 
 CapsLock & [::
-If (A_Language = "0409") 
+If (getactiveKL() = 67699721) 
 {
 	Send {PrintScreen}
 }
-Else If (A_Language = "0416")
+Else If (getactiveKL() = 68551702)
 {
 	Send {Pause}
 }
 Return
 
 CapsLock & sc027:: 
-If (A_Language = "0416")
+If (getactiveKL() = 68551702)
 {
 	Send {PgUp}
 }
 Return
 
 CapsLock & sc028:: 
-If (A_Language = "0416")
+If (getactiveKL() = 68551702)
 {
 	Send {PgDn}
 }
 Return
 
 CapsLock & sc01A:: 
-If (A_Language = "0416")
+If (getactiveKL() = 68551702)
 {
 	Send {PrintScreen}
 }
@@ -143,7 +151,7 @@ CapsLock & Backspace::Delete
 
 ; essa merda funciona
 CapsLock & Escape::
-If (A_Language = "0409") 
+If (getactiveKL() = 67699721) 
 {
 	If GetKeyState("Shift")
 	{
@@ -154,7 +162,7 @@ If (A_Language = "0409")
 		Send {``}
 	}
 }
-Else If (A_Language = "0416")
+Else If (getactiveKL() = 68551702)
 {
 	If GetKeyState("Shift")
 	{
@@ -166,8 +174,6 @@ Else If (A_Language = "0416")
 	}	
 }
 Return
-
-
 ; Functions
 CapsLock & 1::Send {F1}
 CapsLock & 2::Send {F2}
