@@ -20,7 +20,8 @@ getactiveKL() {
 
 ; Arrow Up
 Capslock & `;::
-If (getactiveKL() = 68551702)
+KL := getactiveKL()
+If (getactiveKL() = 68551702 or getactiveKL() = 4027581462)
 {
 	If GetKeyState("Shift")
 	{
@@ -31,7 +32,7 @@ If (getactiveKL() = 68551702)
 		Send {up}
 	}
 }
-Else If (getactiveKL() = 67699721)
+Else If (KL = 67699721)
 {
 	Send {PgUp}
 }
@@ -39,7 +40,8 @@ Return
 
 ; Arrow Up
 Capslock & /::
-If (getactiveKL() = 67699721)
+KL := getactiveKL()
+If (KL = 67699721)
 {
 	If GetKeyState("Shift")
 	{
@@ -109,39 +111,43 @@ CapsLock & k:: Send {Ins}
 CapsLock & l:: Send {Home}
 
 CapsLock & ]::
-If (getactiveKL() = 67699721) 
+KL := getactiveKL()
+If (KL = 67699721) 
 {
 	Send {Pause}
 }
 Return
 
 CapsLock & [::
-If (getactiveKL() = 67699721) 
+KL := getactiveKL()
+If (KL = 67699721) 
 {
 	Send {PrintScreen}
 }
-Else If (getactiveKL() = 68551702)
+Else If (KL = 68551702 or getactiveKL() = 4027581462)
 {
 	Send {Pause}
 }
 Return
 
-CapsLock & sc027:: 
-If (getactiveKL() = 68551702)
+CapsLock & sc027::
+KL := getactiveKL()
+If (KL = 68551702 or getactiveKL() = 4027581462)
 {
 	Send {PgUp}
 }
 Return
 
-CapsLock & sc028:: 
-If (getactiveKL() = 68551702)
+CapsLock & sc028::
+KL := getactiveKL()
+If (KL = 68551702 or getactiveKL() = 4027581462)
 {
 	Send {PgDn}
 }
 Return
 
 CapsLock & sc01A:: 
-If (getactiveKL() = 68551702)
+If (KL = 68551702 or getactiveKL() = 4027581462)
 {
 	Send {PrintScreen}
 }
@@ -151,7 +157,8 @@ CapsLock & Backspace::Delete
 
 ; essa merda funciona
 CapsLock & Escape::
-If (getactiveKL() = 67699721) 
+KL := getactiveKL()
+If (KL = 67699721) 
 {
 	If GetKeyState("Shift")
 	{
@@ -162,7 +169,7 @@ If (getactiveKL() = 67699721)
 		Send {``}
 	}
 }
-Else If (getactiveKL() = 68551702)
+Else If (KL = 68551702 or getactiveKL() = 4027581462)
 {
 	If GetKeyState("Shift")
 	{
